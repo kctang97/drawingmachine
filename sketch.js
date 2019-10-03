@@ -7,7 +7,7 @@ function setup() {
 function draw() {
 
   if (mouseIsPressed){
-    stroke(map(mouseX, 0, windowWidth, 0 , windowHeight, true))
+    stroke(map(mouseX, 0, windowWidth / 1, 0 , windowHeight / 3, true))
     // stroke(random(220, 255),random(200, 255),random(220,  255));
     line(windowWidth - mouseX, windowHeight - mouseY, windowWidth - pmouseX, windowHeight - pmouseY);
     line(mouseX, mouseY, pmouseX, pmouseY);

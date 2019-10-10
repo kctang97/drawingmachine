@@ -1,48 +1,68 @@
 let ary = [];
-let nOff = 0.0;
-let sW = 5;
+let bgColor = 0;
+let gridAry = [];
 
 function setup() {
-  createCanvas(windowWidth - 200, windowHeight  );
-  background(100, 150 ,255);
-  noFill();
+  createCanvas(windowWidth - 100, windowHeight - 200);
+  background(bgColor);
+  grid();
+  strokeWeight(5);
 }
 
 function draw() {
-
-
-
   if (mouseIsPressed){
-    background(100, 150 ,255, 30);
-    strokeWeight(sW);
-    nOff += 0.05;
-    sW = noise(nOff) * 100;
-
-    stroke(map(mouseX, 0, windowWidth / 1, 0 , windowHeight / 3, true))
-    // stroke(random(220, 255),random(200, 255),random(220,  255));
-    // line(windowWidth - mouseX, windowHeight - mouseY, windowWidth - pmouseX, windowHeight - pmouseY);
     line(mouseX, mouseY, pmouseX, pmouseY);
     ary.push([mouseX, mouseY]);
+    beginShape();
+    noFill();
+    for(let i = 0; i < ary.length - 1; i++) {
+        curveVertex(ary[i][0], ary[i][1])
+    }
+    endShape();
   }
-
 }
 
 function keyTyped() {
-  // console.log('key ${key} is being typed');
   if (key === 's'){
     saveCanvas('drawing_','png');
   } else if (key === 'd') {
-    background(100, 150 ,255);
-    strokeWeight(10)
     beginShape();
+    noFill();
     for(let i = 0; i < ary.length - 1; i++) {
         curveVertex(ary[i][0], ary[i][1])
     }
     endShape();
   } else if (key === 'c') {
     clear();
-    background(100, 150 ,255);
+    grid();
+    ary = [];
   }
-
   return false;
+}
+
+function grid() {
+  numCells = 50;
+  fillColor = 255;
+  strokeWeight(0);
+
+  let x;
+  let y;
+
+  for (let i = 0; i <= numCells; i += 1) {
+    gridAry[i] = [];
+    for (let j = 0; j <= numCells; j += 1) {
+      x = i * windowWidth / numCells;
+      y = j * windowHeight / numCells;
+      if (fillColor === 255) {
+        fillColor = 200;
+        gridAry[i][j] = 200;
+      } else {
+        fillColor = 255;
+        gridAry[i][j];
+      }
+      fill(fillColor);
+      rect(i, j, width / numCells, height / numCells);
+    }
+  }
+  strokeWeight(5);
 }

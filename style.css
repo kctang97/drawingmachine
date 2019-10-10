@@ -6,15 +6,10 @@ canvas {
   display: block;
   border: 5px solid black;
   position: absolute;
-  margin-right: 100px;
-  margin-left: 100px;
-
+  margin-right: 50px;
+  margin-left: 50px;
 }
 
-h1 {
-  text-align: center;
-}
-
-h2{
+h2 {
   text-align: center;
 }

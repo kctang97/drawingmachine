@@ -7,11 +7,6 @@ let gridAry = [];
 let bgColor = '#FFFFFF';
 let pColor = '#000000';
 
-let rColor1 = '#add8e6';
-let rColor2 = '#FF0000';
-let rColor3 = '#FFFF33';
-
-
 function setup() {
   createCanvas(wWidth * x, wHeight * y);
   gridAry = grid(x, y, wWidth, wHeight);
@@ -63,13 +58,13 @@ function mouseDragged() {
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
-      pColor = color(rColor1);
+      pColor = color(random(150, 255), 0, 0);
     } else if (keyCode === RIGHT_ARROW) {
-      pColor = color(rColor2);
+      pColor = color(0, random(150, 255),0);
     } else if (keyCode === UP_ARROW) {
-      pColor = color(rColor3);
+      pColor = color(0, 0, random(150, 255));
     } else if (keyCode === DOWN_ARROW) {
-      pColor = '#000000';
+      pColor = color(random(100, 255));
     }
 }
 

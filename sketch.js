@@ -1,68 +1,75 @@
 let ary = [];
-let bgColor = 0;
+let x = 60;
+let y = 40;
+let wWidth = 20;
+let wHeight = 20;
 let gridAry = [];
+let bgColor = '#FFFFFF';
+let pColor = '#000000';
+
 
 function setup() {
-  createCanvas(windowWidth - 100, windowHeight - 200);
+  createCanvas(wWidth * x, wHeight * y);
   background(bgColor);
-  grid();
-  strokeWeight(5);
+  gridAry = grid(x, y, wWidth, wHeight);
+  // console.log(pixelArray);
 }
 
 function draw() {
-  if (mouseIsPressed){
-    line(mouseX, mouseY, pmouseX, pmouseY);
-    ary.push([mouseX, mouseY]);
-    beginShape();
-    noFill();
-    for(let i = 0; i < ary.length - 1; i++) {
-        curveVertex(ary[i][0], ary[i][1])
-    }
-    endShape();
-  }
+
+  drawPix(gridAry, wWidth, wHeight);
 }
 
-function keyTyped() {
-  if (key === 's'){
-    saveCanvas('drawing_','png');
-  } else if (key === 'd') {
-    beginShape();
-    noFill();
-    for(let i = 0; i < ary.length - 1; i++) {
-        curveVertex(ary[i][0], ary[i][1])
+function grid(_x, _y) {
+  for (let i = 0; i < _x; i++) {
+    ary[i] = [];
+    for (let j = 0; j < _y; j++) {
+      // set initial color value to background;
+      ary[i][j] = {
+      on : false
+      };
     }
-    endShape();
-  } else if (key === 'c') {
-    clear();
-    grid();
-    ary = [];
-
   }
-  return false;
+  return ary;
 }
 
-function grid() {
-  numCells = 60;
-  fillColor = 255;
-  strokeWeight(0);
-  let x;
-  let y;
-
-  for (let i = 0; i <= windowWidth; i += windowWidth / numCells) {
-    gridAry[i] = [];
-    for (let j = 0; j <= windowHeight; j += windowHeight / numCells) {
-      x = i * width / numCells;
-      y = j * height / numCells;
-      if (fillColor === 255) {
-        fillColor = 200;
-        gridAry[i][j] = 200;
+function drawPix(_array, _wWidth, _wHeight) {
+  for (let i = 0; i < _array.length; i++) {
+    for (let j = 0; j < _array[i].length; j++) {
+      let x = i * _wWidth;
+      let y = j * _wHeight;
+      if (_array[i][j] == 1){
+        fill(pColor);
       } else {
-        fillColor = 255;
-        gridAry[i][j] = 255;;
+        fill(bgColor);
       }
-      fill(fillColor);
-      rect(i, j, width / numCells, height / numCells);
+      rect(x, y, _wWidth, _wHeight);
     }
   }
-  strokeWeight(5);
+}
+
+function mousePressed() {
+  let c = floor(mouseX / wWidth);
+  let r = floor(mouseY / wHeight);
+
+  if (c >= 0 && c < x && r >= 0 && r < y) {
+    if (keyIsPressed == true && keyCode == SHIFT) {
+      gridAry[c][r] = 0;
+    } else {
+      gridAry[c][r] = 1;
+    }
+  }
+}
+
+function mouseDragged() {
+  let c = floor(mouseX / wWidth);
+  let r = floor(mouseY / wHeight);
+
+  if (c >= 0 && c < x && r >= 0 && r < y) {
+    if (keyIsPressed == true && keyCode == SHIFT) {
+      gridAry[c][r] = 0;
+    } else {
+      gridAry[c][r] = 1;
+    }
+  }
 }

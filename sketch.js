@@ -1,22 +1,25 @@
 let ary = [];
 let x = 60;
-let y = 40;
+let y = 35;
 let wWidth = 20;
 let wHeight = 20;
 let gridAry = [];
 let bgColor = '#FFFFFF';
 let pColor = '#000000';
 
+let rColor1 = '#add8e6';
+let rColor2 = '#FF0000';
+let rColor3 = '#FFFF33';
+
 
 function setup() {
   createCanvas(wWidth * x, wHeight * y);
-  background(bgColor);
+
   gridAry = grid(x, y, wWidth, wHeight);
-  // console.log(pixelArray);
 }
 
 function draw() {
-
+  background(200);
   drawPix(gridAry, wWidth, wHeight);
 }
 
@@ -24,10 +27,7 @@ function grid(_x, _y) {
   for (let i = 0; i < _x; i++) {
     ary[i] = [];
     for (let j = 0; j < _y; j++) {
-      // set initial color value to background;
-      ary[i][j] = {
-      on : false
-      };
+      ary[i][j] = 0;
     }
   }
   return ary;
@@ -46,6 +46,7 @@ function drawPix(_array, _wWidth, _wHeight) {
       rect(x, y, _wWidth, _wHeight);
     }
   }
+  strokeWeight(0);
 }
 
 function mousePressed() {
@@ -71,5 +72,23 @@ function mouseDragged() {
     } else {
       gridAry[c][r] = 1;
     }
+  }
+}
+
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+      pColor = color(rColor1);
+    } else if (keyCode === RIGHT_ARROW) {
+      pColor = color(rColor2);
+    } else if (keyCode === UP_ARROW) {
+      pColor = color(rColor3);
+    } else if (keyCode === DOWN_ARROW) {
+      pColor = '#000000';
+    }
+}
+
+function keyTyped() {
+  if (key === 's'){
+    saveCanvas('drawing_','png');
   }
 }

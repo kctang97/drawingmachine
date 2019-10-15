@@ -6,7 +6,7 @@ let wHeight = 20;
 let gridAry = [];
 let bgColor = '#FFFFFF';
 let pColor = '#000000';
-let rColor = 0;
+
 let rColor1 = '#add8e6';
 let rColor2 = '#FF0000';
 let rColor3 = '#FFFF33';

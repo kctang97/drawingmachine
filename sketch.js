@@ -6,7 +6,7 @@ let wHeight = 20;
 let gridAry = [];
 let bgColor = '#FFFFFF';
 let pColor = '#000000';
-
+let rColor = 0;
 let rColor1 = '#add8e6';
 let rColor2 = '#FF0000';
 let rColor3 = '#FFFF33';
@@ -14,12 +14,11 @@ let rColor3 = '#FFFF33';
 
 function setup() {
   createCanvas(wWidth * x, wHeight * y);
-
   gridAry = grid(x, y, wWidth, wHeight);
+  background(200);
 }
 
 function draw() {
-  background(200);
   drawPix(gridAry, wWidth, wHeight);
 }
 
@@ -43,23 +42,10 @@ function drawPix(_array, _wWidth, _wHeight) {
       } else {
         fill(bgColor);
       }
-      rect(x, y, _wWidth, _wHeight);
+      rect(x, y, wWidth, wHeight);
     }
   }
   strokeWeight(0);
-}
-
-function mousePressed() {
-  let c = floor(mouseX / wWidth);
-  let r = floor(mouseY / wHeight);
-
-  if (c >= 0 && c < x && r >= 0 && r < y) {
-    if (keyIsPressed == true && keyCode == SHIFT) {
-      gridAry[c][r] = 0;
-    } else {
-      gridAry[c][r] = 1;
-    }
-  }
 }
 
 function mouseDragged() {
